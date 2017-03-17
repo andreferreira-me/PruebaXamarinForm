@@ -3,9 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:PruebaXamarinForm"
              x:Class="PruebaXamarinForm.MainPage">
+  <ContentPage.Padding>
+    <OnPlatform x:TypeArguments="Thickness"
+                Android="0, 0, 0, 0"
+                iOS="0, 20, 0, 0"
+                WinPhone="0, 0, 0, 0" />
+  </ContentPage.Padding>
 
-  <Label Text="Welcome to Xamarin Forms!"
-           VerticalOptions="Center"
-           HorizontalOptions="Center" />
+  <ScrollView>
+    <StackLayout Orientation="Vertical" Padding="5, 0, 0, 0">
+      <Switch />
+      <Entry />
+      <Button Text="Button" Command="{Binding Path=MessageCommand}" />
 
+      <Label Text="Data: "></Label>
+      <DatePicker />
+      <SearchBar Text="Search Bar" />
+      <Slider x:Name="SliderControl" Value="10" />
+      <Label Text="Progress Indicator: " />
+      <ProgressBar Progress="{Binding Source={x:Reference Name=SliderControl}, Path=Value}" />
+    </StackLayout>
+  </ScrollView>
 </ContentPage>

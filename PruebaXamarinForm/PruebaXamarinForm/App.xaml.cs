@@ -13,7 +13,7 @@ namespace PruebaXamarinForm
         {
             InitializeComponent();
 
-            MainPage = new PruebaXamarinForm.MainPage();
+            MainPage = new PruebaXamarinForm.View.FormsAssistControlPage();
         }
 
         protected override void OnStart()
