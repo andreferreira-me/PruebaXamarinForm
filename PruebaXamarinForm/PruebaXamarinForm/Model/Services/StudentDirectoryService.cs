@@ -1,6 +1,8 @@
 ﻿using PruebaXamarinForm.Model.Entites;
+using PruebaXamarinForm.Storage;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace PruebaXamarinForm.Model.Services
 {
@@ -8,8 +10,17 @@ namespace PruebaXamarinForm.Model.Services
     {
         public static StudentDirectory LoadStudentDirectory()
         {
+            DatabaseManager dbManager = new DatabaseManager();
+            ObservableCollection<Student> students = new ObservableCollection<Student>(dbManager.GetAllItems<Student>());
             StudentDirectory studentDirectory = new StudentDirectory();
-            ObservableCollection<Student> students;
+
+            if (students.Any())
+            {
+                studentDirectory.Students = students;
+                return studentDirectory;
+            }
+
+            students = new ObservableCollection<Student>();
 
             string[] names = { "André", "Luís", "Marcos", "José" };
 
@@ -28,9 +39,11 @@ namespace PruebaXamarinForm.Model.Services
                 string group = rdn.Next(456, 458).ToString();
                 student.Group = group;
                 student.StudentNumber = rdn.Next(123456, 3223423).ToString();
+                student.Key = student.StudentNumber;
                 student.Average = rdn.Next(100, 1000) / 10;
 
                 students.Add(student);
+                dbManager.SaveValue(student);
             }
 
             studentDirectory.Students = students;

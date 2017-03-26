@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PruebaXamarinForm.Storage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace PruebaXamarinForm.Model.Entites
 {
-    public class Student : ObservableBaseObject
+    public class Student : ObservableBaseObject, IKeyObject
     {
+        public string Key { get; set; }
+
         private string name;
 
         public string Name
